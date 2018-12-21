@@ -10,34 +10,55 @@ def _cypher_alphabet():
     return 'abcdefghijklmnopqrstuvwxyz'
 
 
-def ceaser_cypher_encrypt(plaintext, offset):
+def caesar_cypher_encrypt(plaintext, offset):
     alphabet_split = list(_cypher_alphabet())
-    alphabet = _cypher_alphabet()
     plaintext_split = list(plaintext.lower())
     unknown_letter = []
     encrypted_message = []
 
     # loop through letters in plaintext
     for letter in plaintext_split:
-        print(letter)
 
-        # if letter is not in known alphabet
-        if letter not in alphabet:
+        # if letter is a space
+        if letter == " ":
+            encrypted_message.append(" ")
+            continue
+
+        # elif letter is not in known alphabet
+        elif letter not in alphabet_split:
             # add letter to unknown letters
             unknown_letter.append(letter)
             continue
 
         # if letter is known
-        elif letter in alphabet:
-            letter_value = alphabet.index(letter)
+        elif letter in alphabet_split:
+            letter_value = alphabet_split.index(letter)
             encrypted_value = (letter_value + offset) % 26
-            encrypted_message.append(alphabet_split[encrypted_value])
+            encrypted_message.append(alphabet_split[encrypted_value].upper())
 
-    print(''.join(encrypted_message))
+    return ''.join(encrypted_message)
 
 
-def ceaser_cypher_decrypt(cyphertext, offset):
-    pass
+def caesar_cypher_decrypt(cyphertext, offset):
+    alphabet_split = list(_cypher_alphabet())
+    cyphertext_split = list(cyphertext.lower())
+    decrypted_message = []
+
+    # loop through cyphertext
+    for letter in cyphertext_split:
+
+        # if letter is a space
+        if letter == " ":
+            decrypted_message.append(" ")
+            continue
+
+        # decrypt letter to get value
+        else:
+            letter_value = alphabet_split.index(letter)
+            decrypted_value = (letter_value - offset) % 26
+            decrypted_message.append(alphabet_split[decrypted_value].upper())
+
+    return ''.join(decrypted_message)
 
 
 def hill_cypher_2by2_encrypt(plaintext, a, b, c, d):
