@@ -7,13 +7,13 @@ Project Description:
 
 
 def _cypher_alphabet():
-    return 'abcdefghijklmnopqrstuvwxyz'
+    return list('abcdefghijklmnopqrstuvwxyz')
 
 
 def caesar_cypher_encrypt(plaintext, offset):
-    alphabet_split = list(_cypher_alphabet())
+    alphabet = _cypher_alphabet()
     plaintext_split = list(plaintext.lower())
-    unknown_letter = []
+    unknown_char = []
     encrypted_message = []
 
     # loop through letters in plaintext
@@ -22,25 +22,22 @@ def caesar_cypher_encrypt(plaintext, offset):
         # if letter is a space
         if letter == " ":
             encrypted_message.append(" ")
-            continue
 
         # elif letter is not in known alphabet
-        elif letter not in alphabet_split:
-            # add letter to unknown letters
-            unknown_letter.append(letter)
+        elif letter not in alphabet:
             continue
 
         # if letter is known
-        elif letter in alphabet_split:
-            letter_value = alphabet_split.index(letter)
+        elif letter in alphabet:
+            letter_value = alphabet.index(letter)
             encrypted_value = (letter_value + offset) % 26
-            encrypted_message.append(alphabet_split[encrypted_value].upper())
+            encrypted_message.append(alphabet[encrypted_value].upper())
 
     return ''.join(encrypted_message)
 
 
 def caesar_cypher_decrypt(cyphertext, offset):
-    alphabet_split = list(_cypher_alphabet())
+    alphabet = _cypher_alphabet()
     cyphertext_split = list(cyphertext.lower())
     decrypted_message = []
 
@@ -50,13 +47,12 @@ def caesar_cypher_decrypt(cyphertext, offset):
         # if letter is a space
         if letter == " ":
             decrypted_message.append(" ")
-            continue
 
         # decrypt letter to get value
         else:
-            letter_value = alphabet_split.index(letter)
+            letter_value = alphabet.index(letter)
             decrypted_value = (letter_value - offset) % 26
-            decrypted_message.append(alphabet_split[decrypted_value].upper())
+            decrypted_message.append(alphabet[decrypted_value].upper())
 
     return ''.join(decrypted_message)
 
@@ -70,7 +66,36 @@ def hill_cypher_2by2_decrypt(cyphertext, a, b, c, d):
 
 
 def vigenere_cypher_encrypt(plaintext, key):
-    pass
+    alphabet = _cypher_alphabet()
+    plaintext = list(plaintext)
+    key = list(key)
+    encrypted_message = []
+    key_count = 0
+
+    # loop through plaintext
+    for letter in plaintext:
+
+        #  if key_count at length of key reset to zero
+        if key_count == len(key):
+            key_count = 0
+
+        # if letter is a space - append a space
+        if letter == ' ':
+            encrypted_message.append(" ")
+
+        # elif non alphabetical char - continue
+        elif letter not in alphabet:
+            continue
+
+        # else alphabetical char - calculate value, append alphabet letter matching value
+        else:
+            encrypted_value = (alphabet.index(letter) + alphabet.index(key[key_count])) % 26
+            encrypted_message.append(alphabet[encrypted_value])
+
+        # increment key_count
+        key_count += 1
+
+    return "".join(encrypted_message)
 
 
 def vigenere_cypher_decrypt(cyphertext, key):
