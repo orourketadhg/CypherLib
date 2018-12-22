@@ -65,9 +65,9 @@ def hill_cypher_2by2_decrypt(cyphertext, a, b, c, d):
     pass
 
 
-def vigenere_cypher_encrypt(plaintext, key):
+def vigenere_cypher_encrypt(plaintext, key, space=0):
     alphabet = _cypher_alphabet()
-    plaintext = list(plaintext)
+    plaintext = list(plaintext.lower())
     key = list(key)
     encrypted_message = []
     key_count = 0
@@ -79,8 +79,8 @@ def vigenere_cypher_encrypt(plaintext, key):
         if key_count == len(key):
             key_count = 0
 
-        # if letter is a space - append a space
-        if letter == ' ':
+        # if letter is a space and in space mode - append a space
+        if letter == ' ' and space == 1:
             encrypted_message.append(" ")
 
         # elif non alphabetical char - continue
@@ -90,7 +90,7 @@ def vigenere_cypher_encrypt(plaintext, key):
         # else alphabetical char - calculate value, append alphabet letter matching value
         else:
             encrypted_value = (alphabet.index(letter) + alphabet.index(key[key_count])) % 26
-            encrypted_message.append(alphabet[encrypted_value])
+            encrypted_message.append(alphabet[encrypted_value].upper())
 
         # increment key_count
         key_count += 1
@@ -98,5 +98,30 @@ def vigenere_cypher_encrypt(plaintext, key):
     return "".join(encrypted_message)
 
 
-def vigenere_cypher_decrypt(cyphertext, key):
-    pass
+def vigenere_cypher_decrypt(cyphertext, key, space=0):
+    alphabet = _cypher_alphabet()
+    cyphertext = list(cyphertext.lower())
+    key = list(key)
+    decrypted_message = []
+    key_count = 0
+
+    # loop through cyphertext
+    for letter in cyphertext:
+
+        # if key_count at max length - set to zero
+        if key_count == len(key):
+            key_count = 0
+
+        # if letter is a space and space mode enabled - append a space
+        if letter == " " and space == 1:
+            decrypted_message.append(" ")
+
+        # else calculate decrypted letter value, then append to decrypted_message
+        else:
+            decrypted_value = (alphabet.index(letter) - alphabet.index(key[key_count])) % 26
+            decrypted_message.append(alphabet[decrypted_value].upper())
+
+        # increment value
+        key_count += 1
+
+    return "".join(decrypted_message)
