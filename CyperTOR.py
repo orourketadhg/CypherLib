@@ -1,8 +1,14 @@
+import random
+
 """
 Author: Tadhg O'Rourke
 Date: 20/12/2018
 
 Project Description:
+    A library of cyphers including:
+        Caesar Cypher
+        Vigenere Cypher
+        2X2 Hill Cypher
 """
 
 
@@ -55,14 +61,6 @@ def caesar_cypher_decrypt(cyphertext, offset):
             decrypted_message.append(alphabet[decrypted_value].upper())
 
     return ''.join(decrypted_message)
-
-
-def hill_cypher_2by2_encrypt(plaintext, a, b, c, d):
-    pass
-
-
-def hill_cypher_2by2_decrypt(cyphertext, a, b, c, d):
-    pass
 
 
 def vigenere_cypher_encrypt(plaintext, key, space=0):
@@ -125,3 +123,35 @@ def vigenere_cypher_decrypt(cyphertext, key, space=0):
         key_count += 1
 
     return "".join(decrypted_message)
+
+
+def hill_cypher_2by2_encrypt(plaintext, a, b, c, d):
+    alphabet = _cypher_alphabet()
+    plaintext = list(plaintext.lower())
+    encrypted_message = []
+
+    for letter in plaintext[:]:
+        if letter not in alphabet:
+            plaintext.remove(letter)
+
+    # if plaintext is not divisible by 2 - append a random letter on
+    if len(plaintext) % 2 != 0:
+        plaintext.append(alphabet[random.randrange(0, 25)])
+
+    # loop through plaintext - incrementing by 2
+    for i in range(0, len(plaintext), 2):
+
+        # matrix multiplication
+        val1 = ((a * alphabet.index(plaintext[i])) + (b * alphabet.index(plaintext[i + 1]))) % 26
+        val2 = ((c * alphabet.index(plaintext[i])) + (d * alphabet.index(plaintext[i + 1]))) % 26
+
+        # append encrypted letters
+        encrypted_message.append(alphabet[val1])
+        encrypted_message.append(alphabet[val2])
+
+    return "".join(encrypted_message).upper()
+
+
+def hill_cypher_2by2_decrypt(cyphertext, a, b, c, d):
+    pass
+
