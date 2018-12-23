@@ -5,7 +5,7 @@
 # Title: general methods for all ciphers
 
 
-class Cipher:
+class Cypher:
 
     @staticmethod
     def alphabet_lower():

@@ -6,27 +6,42 @@
 
 from cypher.Caesar import Caesar
 from cypher.Vigenere import Vigenere
+from cypher.Atbash import Atbash
 
 print("=" * 50, end='\n\n')
 
-print("Caesar Cypher Testing", end='\n\n')
+print("Caesar Cypher Testing: ")
 
 caesar_cypher = Caesar()
 
 caesar_encrypt = caesar_cypher.encrypt("Hello World", 15)
-print(caesar_encrypt, end='\n\n')
+print("Encrypted - " + caesar_encrypt, end='\n\n')
 
 caesar_decrypt = caesar_cypher.decrypt(caesar_encrypt, 15)
-print(caesar_decrypt, end='\n\n')
+print("Decrypted - " + caesar_decrypt, end='\n\n')
 
 print("=" * 50, end='\n\n')
 
-print("Vigenere Cypher Testing")
+print("Vigenere Cypher Testing:")
 
 vigenere_cypher = Vigenere()
 
 vigenere_encrypt = vigenere_cypher.encrypt("Hello World", "test")
-print(vigenere_encrypt, end='\n\n')
+print("Encrypted - " + vigenere_encrypt, end='\n\n')
 
 vigenere_decrypt = vigenere_cypher.decrypt(vigenere_encrypt, "test")
-print(vigenere_decrypt, end='\n\n')
+print("Decrypted - " + vigenere_decrypt, end='\n\n')
+
+print("=" * 50, end='\n\n')
+
+print("Atbash Cypher Testing:")
+
+atbash_cypher = Atbash()
+
+atbash_encrypt = atbash_cypher.encrypt("Hello World", "zabcdefghijklmonpqrstuvwxy")
+print("Encrypted - " + atbash_encrypt, end='\n\n')
+
+atbash_decrypt = atbash_cypher.decrypt(atbash_encrypt, "zabcdefghijklmonpqrstuvwxy")
+print("Decrypted - " + atbash_decrypt, end='\n\n')
+
+print("=" * 50, end='\n\n')

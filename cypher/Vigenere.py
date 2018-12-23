@@ -4,10 +4,10 @@
 
 # Title: vigenere cypher
 
-from cypher.General import Cipher
+from cypher.General import Cypher
 
 
-class Vigenere(Cipher):
+class Vigenere(Cypher):
 
     def __init__(self):
         self.alphabet = self.alphabet_lower()
