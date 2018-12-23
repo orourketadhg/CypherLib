@@ -16,6 +16,12 @@ def _cypher_alphabet():
     return list('abcdefghijklmnopqrstuvwxyz')
 
 
+def _calculate_determinant(matrix):
+    determinant = 1 / ((matrix[0] * matrix[3]) - (matrix[1] * matrix[2]))
+
+
+
+
 def caesar_cypher_encrypt(plaintext, offset):
     alphabet = _cypher_alphabet()
     plaintext_split = list(plaintext.lower())
@@ -153,5 +159,14 @@ def hill_cypher_2by2_encrypt(plaintext, a, b, c, d):
 
 
 def hill_cypher_2by2_decrypt(cyphertext, a, b, c, d):
-    pass
+    alphabet = _cypher_alphabet()
+    cyphertext = list(cyphertext.lower())
+    decrypted_message = []
 
+    inverse_matrix = [d, -b, -c, a]
+
+
+
+
+
+hill_cypher_2by2_decrypt("Test", 1, 2, 3, 4)
