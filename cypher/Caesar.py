@@ -16,6 +16,7 @@ class Caesar(Cipher):
 
     def encrypt(self, plaintext, offset):
         plaintext_split = list(plaintext.lower())
+        self.new_message = []
 
         # loop through letters in plaintext
         for letter in plaintext_split:
@@ -38,6 +39,7 @@ class Caesar(Cipher):
 
     def decrypt(self, cyphertext, offset):
         cyphertext_split = list(cyphertext.lower())
+        self.new_message = []
 
         # loop through cyphertext
         for letter in cyphertext_split:

@@ -15,8 +15,9 @@ class Vigenere(Cipher):
         self.key_count = 0
 
     def encrypt(self, plaintext, key):
-        plaintext = list(plaintext)
+        plaintext = list(plaintext.lower())
         key = list(key)
+        self.new_message = []
 
         self.key_count = 0
 
@@ -46,8 +47,9 @@ class Vigenere(Cipher):
         return "".join(self.new_message)
 
     def decrypt(self, cyphertext, key):
-        cyphertext = list(cyphertext)
+        cyphertext = list(cyphertext.lower())
         key = list(key)
+        self.new_message = []
 
         self.key_count = 0
 
