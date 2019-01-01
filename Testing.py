@@ -7,6 +7,7 @@
 from cypher.Caesar import Caesar
 from cypher.Vigenere import Vigenere
 from cypher.Atbash import Atbash
+from cypher.ROT13 import ROT13
 
 print("=" * 50, end='\n\n')
 
@@ -45,3 +46,16 @@ atbash_decrypt = atbash_cypher.decrypt(atbash_encrypt, "zabcdefghijklmonpqrstuvw
 print("Decrypted - " + atbash_decrypt, end='\n\n')
 
 print("=" * 50, end='\n\n')
+
+print("ROT13 Cypher Testing:")
+
+ROT13_cypher = ROT13()
+
+ROT13_encrypt = ROT13_cypher.encrypt("Hello World")
+print("Encrypted - " + ROT13_encrypt, end='\n\n')
+
+ROT13_decrypt = ROT13_cypher.decrypt(ROT13_encrypt)
+print("Decrypted - " + ROT13_decrypt, end='\n\n')
+
+print("=" * 50, end='\n\n')
+

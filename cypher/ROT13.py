@@ -1,19 +1,19 @@
 # Author: Tadhg O'Rourke
-# Created: 23/12/2018
+# Created: 01/01/2019
 # Last Edited: 01/01/2019
 
-# Title: caesar cypher
-
+# Title: ROT13 Cypher
 from cypher.General import Cypher
 
 
-class Caesar(Cypher):
+class ROT13(Cypher):
 
     def __init__(self):
         self.alphabet = self.alphabet_lower()
         self.new_message = []
+        self.offset = 13
 
-    def encrypt(self, plaintext, offset):
+    def encrypt(self, plaintext):
         plaintext = list(plaintext.lower())
         self.new_message = []
 
@@ -34,7 +34,7 @@ class Caesar(Cypher):
                 letter_value = self.alphabet.index(letter)
 
                 # calculate encrypted letter value
-                offset_value = (letter_value + offset) % 26
+                offset_value = (letter_value + self.offset) % 26
 
                 # append encrypted letter
                 self.new_message.append(self.alphabet[offset_value].upper())
@@ -42,7 +42,7 @@ class Caesar(Cypher):
         # return encrypted string
         return ''.join(self.new_message)
 
-    def decrypt(self, cyphertext, offset):
+    def decrypt(self, cyphertext):
         cyphertext = list(cyphertext.lower())
         self.new_message = []
 
@@ -63,7 +63,7 @@ class Caesar(Cypher):
                 letter_value = self.alphabet.index(letter)
 
                 # calculate decrypted letter value
-                offset_value = (letter_value - offset) % 26
+                offset_value = (letter_value - self.offset) % 26
 
                 # append encrypted letter
                 self.new_message.append(self.alphabet[offset_value].upper())
